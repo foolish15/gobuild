@@ -12,5 +12,6 @@ jobs:
           name: "Build docker image and push to docker hub"
           command: |
             docker build -t harbor.touch-ics.com/library/gobuild:latest .
+            docker image ls .
             docker push harbor.touch-ics.com/library/gobuild:latest
       - run: echo Done
