@@ -1,0 +1,16 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: docker
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: docker login $HARBOR_URL  -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      - run:
+          name: "Build docker image and push to docker hub"
+          command: |
+            docker build -t harbor.touch-ics.com/library/gobuildlatest .
+            docker push harbor.touch-ics.com/library/gobuildlatest
+      - run: echo Done
